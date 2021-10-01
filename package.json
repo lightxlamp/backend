@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/lightxlamp/backend/issues"
   },
-  "homepage": "https://github.com/lightxlamp/backend#readme"
+  "homepage": "https://github.com/lightxlamp/backend#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
 }
