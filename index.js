@@ -13,6 +13,17 @@ app.get('/', (req, res)=> {
     res.status(200).json('Server is working');
 });
 
+app.get('/my_experiment', (req, res)=> {
+    res.status(200).json('New endpoint to test nodemon');
+});
+
+app.get('/my_experiment_2', (req, res)=> {
+    // res.status(200).json(req.headers);
+    res.status(200).json(req.query);
+    // res.status(200).json(req.query.sex);
+    // res.status(200).json(req.hostname);
+});
+
 // Launching server
 // localhost:PORT
 app.listen(PORT, () => {
