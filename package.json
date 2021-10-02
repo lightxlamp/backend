@@ -21,7 +21,8 @@
   },
   "homepage": "https://github.com/lightxlamp/backend#readme",
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "mongoose": "^6.0.8"
   },
   "devDependencies": {
     "nodemon": "^2.0.13"
