@@ -1,10 +1,7 @@
-console.log('Test Server...');
-
 import express from "express";
 import mongoose from "mongoose";
 import { config } from "./config/index.js";
-
-console.log(config.user);
+import Post from "./Post.js"
 
 const PORT = 5051;
 // taken from MongoDB -> connect app tab
@@ -37,8 +34,29 @@ app.post('/print_params_of_post_request', (req, res) => {
     res.status(200).json(req.body)
 })
 
-// Launching server
-// localhost:PORT
-app.listen(PORT, () => {
-    console.log('Server started');
+app.post('/create_post', async (req, res) => {
+    try {
+        const {author, title, content, picture} = req.body;
+        const post = await Post.create({author, title, content, picture});
+        res.json(post)
+    }
+    catch(e) {
+        res.status(500).json(e);
+    }
 })
+
+async function startApp() {
+    try {
+        // Launching server
+        // localhost:PORT
+        await mongoose.connect(DB_URL);
+        app.listen(PORT, () => {
+            console.log('Server started');
+        })
+    }
+    catch(e) {
+        console.log(e);
+    }
+}
+
+startApp();
