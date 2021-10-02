@@ -26,7 +26,7 @@ class PostController {
         try {
             const {id} = req.params;
             if(!id) {
-                res.status(400).json({message: 'ID has not been passed'});
+                res.status(400).json({message: 'ID is missing'});
             }
             const post = await Post.findById(id);
             return res.json(post);
@@ -38,9 +38,12 @@ class PostController {
     
     async update(req, res) {
         try {
-            const {author, title, content, picture} = req.body;
-            const post = await Post.create({author, title, content, picture});
-            res.json(post)
+            const post = req.body;
+            if(!post._id) {
+                res.status(400).json({message: 'ID is missing'});
+            }
+            const updatedPost = await Post.findByIdAndUpdate(post._id, post, {new: true});
+            return res.json(updatedPost); 
         }
         catch(e) {
             res.status(500).json(e);
@@ -49,9 +52,12 @@ class PostController {
     
     async delete(req, res) {
         try {
-            const {author, title, content, picture} = req.body;
-            const post = await Post.create({author, title, content, picture});
-            res.json(post)
+            const {id} = req.params;
+            if(!id) {
+                res.status(400).json({message: 'ID is missing'});
+            }
+            const post = await Post.findByIdAndDelete(id);
+            return res.json(post);
         }
         catch(e) {
             res.status(500).json(e);
