@@ -1,7 +1,8 @@
 import express from "express";
 import mongoose from "mongoose";
 import { config } from "./config/index.js";
-import Post from "./Post.js"
+// import Post from "./Post.js"
+import router from "./router.js";
 
 const PORT = 5051;
 // taken from MongoDB -> connect app tab
@@ -9,6 +10,7 @@ const DB_URL = 'mongodb+srv://'+ config.user +':' + config.password + '@cluster0
 
 const app = express();
 app.use(express.json()) // so we can handle JSON response
+app.use('/api', router)
 
 // Creating Endpoint, that will handle GET query
 // 1st parameter is address, on which endpoint will work
@@ -34,16 +36,16 @@ app.post('/print_params_of_post_request', (req, res) => {
     res.status(200).json(req.body)
 })
 
-app.post('/create_post', async (req, res) => {
-    try {
-        const {author, title, content, picture} = req.body;
-        const post = await Post.create({author, title, content, picture});
-        res.json(post)
-    }
-    catch(e) {
-        res.status(500).json(e);
-    }
-})
+// app.post('/create_post', async (req, res) => {
+//     try {
+//         const {author, title, content, picture} = req.body;
+//         const post = await Post.create({author, title, content, picture});
+//         res.json(post)
+//     }
+//     catch(e) {
+//         res.status(500).json(e);
+//     }
+// })
 
 async function startApp() {
     try {
