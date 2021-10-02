@@ -1,8 +1,12 @@
 console.log('Test Server...');
 
 import express from "express";
+import mongoose from "mongoose";
 
 const PORT = 5051;
+// readPWD();
+// taken from MongoDB -> connect app tab
+const DB_URL = 'mongodb+srv://lightxlamp:<password>@cluster0.imdui.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
 
 const app = express();
 app.use(express.json()) // so we can handle JSON response
@@ -15,7 +19,8 @@ app.get('/', (req, res)=> {
 });
 
 app.get('/my_experiment', (req, res)=> {
-    res.status(200).json('New endpoint to test nodemon');
+    //res.status(200).json('New endpoint to test nodemon');
+    res.send('Hello World!')
 });
 
 app.get('/my_experiment_2', (req, res)=> {
@@ -35,3 +40,16 @@ app.post('/print_params_of_post_request', (req, res) => {
 app.listen(PORT, () => {
     console.log('Server started');
 })
+
+
+// function readPWD() {
+//     const fs = require('fs');
+
+//     fs.readFile('/pwd.txt', 'utf8' , (err, data) => {
+//       if (err) {
+//         console.error(err)
+//         return
+//       }
+//       console.log(data)
+//     })
+// }
