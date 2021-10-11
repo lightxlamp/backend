@@ -1,15 +1,7 @@
-import Post from "./Post.js";
-import PostService from "./PostService.js";
-
-class PostController {
-    async create(req, res) {
-        try {
-            const post = await PostService.create(req.body);
-            res.json(post)
-        }
-        catch(e) {
-            res.status(500).json(e);
-        }
+class PostService {
+    async create(post) {
+        const createdPost = await Post.create(post);
+        return createdPost;
     }
 
     async getAll(req, res) {
@@ -65,4 +57,4 @@ class PostController {
     }
 }
 
-export default new PostController();
+export default new PostService();
